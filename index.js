@@ -39,12 +39,10 @@
 // ];
 
 // const toggleUserState = (allUsers, userName) => {
-//  return new Promise ((res)=>{
 //     const updatedUsers = allUsers.map(user =>
 //     user.name === userName ? { ...user, active: !user.active } : user,
 //   );
-//   res(updatedUsers);
-//   });
+//   return Promise.all(updatedUsers);
 // };
 
 // const logger = updatedUsers => console.table(updatedUsers);
@@ -120,5 +118,3 @@ makeTransaction({ id: 72, amount: 75 })
 makeTransaction({ id: 73, amount: 100 })
   .then(logSuccess)
   .catch(logError);
-
-
