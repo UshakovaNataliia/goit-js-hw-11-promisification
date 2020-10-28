@@ -1,63 +1,63 @@
-// // Задание 1
+// Задание 1
 
-// // Напиши функцию delay(ms), которая возвращает промис, переходящий 
-// // в состояние "resolved" через ms миллисекунд. 
-// // Значением исполнившегося промиса должно быть то кол-во миллисекунд 
-// // которое передали во время вызова функции delay.
+// Напиши функцию delay(ms), которая возвращает промис, переходящий 
+// в состояние "resolved" через ms миллисекунд. 
+// Значением исполнившегося промиса должно быть то кол-во миллисекунд 
+// которое передали во время вызова функции delay.
 
-// const delay = ms => {
-//   return new Promise((res)=>{
-//     setTimeout(() => {
-//       res(ms);
-//     }, ms);
-//   })
-// };
+const delayFn = ms => {
+  return new Promise((resolve)=>{
+    setTimeout(() => {
+      resolve(ms);
+    }, ms);
+  })
+};
 
-// const logger = time => console.log(`Resolved after ${time}ms`);
+const loggerFn = time => console.log(`Resolved after ${time}ms`);
 
-// // Вызовы функции для проверки
-// delay(2000).then(logger); // Resolved after 2000ms
-// delay(1000).then(logger); // Resolved after 1000ms
-// delay(1500).then(logger); // Resolved after 1500ms
-
-
+// Вызовы функции для проверки
+delayFn(2000).then(loggerFn); // Resolved after 2000ms
+delayFn(1000).then(loggerFn); // Resolved after 1000ms
+delayFn(1500).then(loggerFn); // Resolved after 1500ms
 
 
 
 
-// // Задание 2
 
-// // Перепиши функцию toggleUserState() так, чтобы она не использовала 
-// // callback-функцию callback, а принимала всего два параметра allUsers
-// //  и userName и возвращала промис.
 
-// const users = [
-//   { name: 'Mango', active: true },
-//   { name: 'Poly', active: false },
-//   { name: 'Ajax', active: true },
-//   { name: 'Lux', active: false },
-// ];
+// Задание 2
 
-// const toggleUserState = (allUsers, userName) => {
-//     const updatedUsers = allUsers.map(user =>
-//     user.name === userName ? { ...user, active: !user.active } : user,
-//   );
-//   return Promise.all(updatedUsers);
-// };
+// Перепиши функцию toggleUserState() так, чтобы она не использовала 
+// callback-функцию callback, а принимала всего два параметра allUsers
+//  и userName и возвращала промис.
 
-// const logger = updatedUsers => console.table(updatedUsers);
+const users = [
+  { name: 'Mango', active: true },
+  { name: 'Poly', active: false },
+  { name: 'Ajax', active: true },
+  { name: 'Lux', active: false },
+];
 
-// /*
-//  * Сейчас работает так
-// //  */
-// // toggleUserState(users, 'Mango', logger);
-// // toggleUserState(users, 'Lux', logger);
+const toggleUserState = (allUsers, userName) => {
+    const updatedUsers = allUsers.map(user =>
+    user.name === userName ? { ...user, active: !user.active } : user,
+  );
+  return Promise.all(updatedUsers);
+};
 
-// /*
-//  * Должно работать так
+const logger = updatedUsers => console.table(updatedUsers);
+
+/*
+ * Сейчас работает так
 //  */
-// toggleUserState(users, 'Mango').then(logger);
-// toggleUserState(users, 'Lux').then(logger);
+// toggleUserState(users, 'Mango', logger);
+// toggleUserState(users, 'Lux', logger);
+
+/*
+ * Должно работать так
+ */
+toggleUserState(users, 'Mango').then(logger);
+toggleUserState(users, 'Lux').then(logger);
 
 
 
